@@ -1,27 +1,67 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
-<!-- above set at the top of the file will set     -->
-<!-- the browser's rendering engine into           -->
-<!-- "Quirks Mode". Replacing this declaration     -->
-<!-- with a "Standards Mode" doctype is supported, -->
-<!-- but may lead to some differences in layout.   -->
-
-<html>
+<!DOCTYPE html>
+<html ng-app="aoc">
+  
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8" />
     <title>Eat Or Drink It</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="aoc.js"></script>
+    <script type="text/javascript" src="score.js"></script>
   </head>
 
-  <body>
-    <h1>Eat Or Drink It</h1>
-    <h2>Welcome to Magnien-Vittu-Bousseaud's project!</h2>
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href="eatordrinkit">EatOrDrinkIt</a></td>
-      </tr>
-    </table>
+  <body ng-controller="AOCController as aoc">
+    
+    <!-- Game -->
+    <div ng-show="state == 1">
+      <section ng-init="tab = 0">
+        <ul class="list-group">
+            <h3>{{questions[tab].name}}</h3>
+            <button ng-click="aoc.check(0, questions[tab]);">Mangeable</button>
+            <button ng-click="aoc.check(1, questions[tab]);">Buvable</button>
+        </ul>
+      </section>
+    </div>
+    
+    <!-- Results -->
+    <div ng-show="state == 2">
+      <h1>My score</h1>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="score in scores">
+          <h3>
+            {{score.name}}
+            :
+            <span class="pull-right">{{score.result}}</span>
+          </h3>
+        </li>
+      </ul>
+      
+      <!-- Test high scores -->
+      <div ng-controller="HighScoreController as hs">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="highScore in highScores">
+          {{highScore}}
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+    <!-- High scores -->
+    <!--
+    <div ng-show="state == 3" ng-controller="HighScoreController as hs">
+    </div>
+    -->
+
   </body>
+
 </html>
+
+<script>
+  var init = function() {
+    console.log("init called");
+    window.init();
+  };
+</script>
+
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
