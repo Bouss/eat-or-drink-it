@@ -1,57 +1,63 @@
 <!DOCTYPE html>
-<html ng-app="aoc">
+<html lang="fr" ng-app="app">
   
   <head>
     <meta charset="utf-8" />
     <title>Eat Or Drink It</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/aoc.js"></script>
     <script type="text/javascript" src="js/score.js"></script>
   </head>
 
-  <body ng-controller="AOCController as aoc">
+  <body ng-controller="MainController">
     
-    <!-- Game -->
-    <div ng-show="state == 1">
-      <section ng-init="tab = 0">
+    <!-- Homepage -->
+    <div ng-show="page == 1">
+      <h1>Eat Or Drink It</h1>
+      <button ng-click="page = 2">Jouer</button>
+      
+      <!-- High scores -->
+      <h2>Meilleurs scores</h2>
+      <div ng-controller="HighScoreController as hs">
         <ul class="list-group">
-            <h3>{{questions[tab].name}}</h3>
-            <button ng-click="aoc.check(0, questions[tab]);">Mangeable</button>
-            <button ng-click="aoc.check(1, questions[tab]);">Buvable</button>
+          <li class="list-group-item" ng-repeat="highScore in highScores">
+            {{highScore}}
+          </li>
         </ul>
-      </section>
+      </div>
     </div>
     
-    <!-- Results -->
-    <div ng-show="state == 2">
-      <h1>My score</h1>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="score in scores">
-          <h3>
-            {{score.name}}
-            :
-            <span class="pull-right">{{score.result}}</span>
-          </h3>
-        </li>
-      </ul>
+    <div ng-controller="AOCController as aoc">
+      <!-- Game -->
+      <div ng-show="page == 2">
+        <section ng-init="i = 0">
+          <ul class="list-group">
+            <h2>{{questions[i].name}}</h2>
+            <button ng-click="aoc.check(0, questions[i]);">Mangeable</button>
+            <button ng-click="aoc.check(1, questions[i]);">Buvable</button>
+          </ul>
+        </section>
+      </div>
       
-      <!-- Test high scores -->
-      <div ng-controller="HighScoreController as hs">
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="highScore in highScores">
-          {{highScore}}
-        </li>
-      </ul>
+      <!-- Results ("My score") -->
+      <div ng-show="page == 3">
+        <h1>My score</h1>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="score in scores">
+            <h3>
+              {{score.name}}
+              :
+              <span class="pull-right">{{score.result}}</span>
+            </h3>
+          </li>
+        </ul>
+      
+        <button ng-click="page = 1">Revenir à la page d'accueil</button>
       </div>
       
     </div>
-    
-    <!-- High scores -->
-    <!--
-    <div ng-show="state == 3" ng-controller="HighScoreController as hs">
-    </div>
-    -->
 
   </body>
 
