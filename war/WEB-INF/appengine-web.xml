@@ -29,8 +29,9 @@
   -->
 
   <static-files>
-    <include path="/**.png" />
-    <include path="/javascript/*.js" />
+    <include path="/img/*.png" />
+    <include path="/css/*.css" />
+    <include path="/js/*.js" />
     <exclude path="/generator/**.png" />
   </static-files>
 

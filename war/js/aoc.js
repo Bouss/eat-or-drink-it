@@ -5,6 +5,7 @@ app.controller('AOCController', ['$scope', '$window', function($scope, $window) 
   $scope.scores = [];
   $scope.state = 1;
   
+  // Adds the answer given in scores
   this.check = function(idButton, question) {
     $scope.scores.push(
       {
