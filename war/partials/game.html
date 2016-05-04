@@ -1,0 +1,15 @@
+<!-- Handled by AocCtrl -->
+<div>  
+    <form>
+        {{aocs[index].name}}
+        <label>
+            <input type="radio" ng-model="answer.question1" value="{{answerValues.isFood}}">
+            Ça se mange
+        </label>
+        <label>
+            <input type="radio" ng-model="answer.question1" value="{{answerValues.isDrink}}">
+            Ça se boit
+        </label>
+        <input type="submit" ng-click="addAnswer(answer)" value="Continuer" />
+    </form>
+</div>

@@ -6,68 +6,20 @@
     <title>Eat Or Drink It</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/aoc.js"></script>
-    <script type="text/javascript" src="js/score.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/aoc.js"></script>
+    <script src="js/score.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
   </head>
 
-  <body ng-controller="MainController">
-    
-    <!-- Homepage -->
-    <div ng-show="page == 1">
-      <h1>Eat Or Drink It</h1>
-      <button ng-click="page = 2">Jouer</button>
-      
-      <!-- High scores -->
-      <h2>Meilleurs scores</h2>
-      <div ng-controller="HighScoreController as hs">
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="highScore in highScores">
-            {{highScore}}
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <div ng-controller="AOCController as aoc">
-      <!-- Game -->
-      <div ng-show="page == 2">
-        <section ng-init="i = 0">
-          <ul class="list-group">
-            <h2>{{questions[i].name}}</h2>
-            <button ng-click="aoc.check(0, questions[i]);">Mangeable</button>
-            <button ng-click="aoc.check(1, questions[i]);">Buvable</button>
-          </ul>
-        </section>
-      </div>
-      
-      <!-- Results ("My score") -->
-      <div ng-show="page == 3">
-        <h1>My score</h1>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="score in scores">
-            <h3>
-              {{score.name}}
-              :
-              <span class="pull-right">{{score.result}}</span>
-            </h3>
-          </li>
-        </ul>
-      
-        <button ng-click="page = 1">Revenir à la page d'accueil</button>
-      </div>
-      
-    </div>
-
+  <body>
+    <h1>Eat Or Drink It</h1>
+    <div ng-view></div>
+    <nav>
+        <a href="#/home" class="btn btn-primary">Accueil</a>
+        <a href="#/game" class="btn btn-primary">Jouer</a>
+    </nav>
   </body>
 
 </html>
-
-<script>
-  var init = function() {
-    console.log("init called");
-    window.init();
-  };
-</script>
-
-<script src="https://apis.google.com/js/client.js?onload=init"></script>
