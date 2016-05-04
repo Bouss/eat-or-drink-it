@@ -1,0 +1,13 @@
+<!-- Handled by ResultCtrl -->
+<div>
+  <h1>Mon score</h1>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="result in results">
+      <h3>
+        {{result.aocName}}
+        :
+        <span class="pull-right">{{result.question1Result}}</span>
+      </h3>
+    </li>
+  </ul>
+</div>

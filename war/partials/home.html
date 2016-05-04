@@ -1,0 +1,13 @@
+<!-- Handled by ScoreCtrl -->
+<div ng-show="isBackendReady">
+  <a href="#/game" class="btn btn-primary">Jouer</a>
+  
+  <!-- High scores -->
+  <h2>Meilleurs scores</h2>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="score in scores">
+      {{score}}
+    </li>
+  </ul>
+  
+</div>

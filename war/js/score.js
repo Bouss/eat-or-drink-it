@@ -1,24 +1,32 @@
-var app = angular.module('score', []);
+'use strict';
 
-app.controller('HighScoreController', ['$scope', '$window', function($scope, $window) {
-  $scope.highScores = [];
+var score = angular.module('score', []);
 
-  // little hack to be sure that apis.google.com/js/client.js is loaded
-  // before calling
-  // onload -> init() -> window.init() -> then here
+score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
+  $scope.scores = [];
+
   $window.init = function() {
     console.log("windowinit called");
-    var rootApi = 'https://eat-or-drink-it.appspot.com/_ah/api/';
+    $scope.$apply($scope.loadScores);
+  };
+
+  /**
+   *  Loads the scores via the API
+   */
+  $scope.loadScores = function() {
     gapi.client.load('scoreentityendpoint', 'v1', function() {
       console.log("score api loaded");
-      gapi.client.scoreentityendpoint.listScoreEntity().execute(
-        function(resp) {
-          $scope.highScores=resp.items;
-          $scope.$apply();
-          console.log(resp);
-        });
-    }, rootApi);
-    
-  }
+      $scope.isBackendReady = true;
+      $scope.listScores();
+    }, 'https://eat-or-drink-it.appspot.com/_ah/api');
+  };
+  
+  $scope.listScores = function() {
+    gapi.client.scoreentityendpoint.listScoreEntity().execute(function(resp) {
+      $scope.scores = resp.items;
+      $scope.$apply();
+      console.log(resp);
+    });
+  };
     
 }]);
