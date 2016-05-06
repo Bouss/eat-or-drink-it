@@ -28,14 +28,14 @@
   "ownerName" : "mycompany.com",
   "packagePath" : "services",
   "methods" : {
-    "scoreentityendpoint.getScoreEntity" : {
+    "scoreentityendpoint.removeScoreEntity" : {
       "path" : "scoreentity/{id}",
-      "httpMethod" : "GET",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "api.ScoreEntityEndpoint.getScoreEntity",
+      "rosyMethod" : "api.ScoreEntityEndpoint.removeScoreEntity",
       "request" : {
         "parameters" : {
           "id" : {
@@ -46,7 +46,7 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "autoTemplate(backendResponse)"
+        "body" : "empty"
       }
     },
     "scoreentityendpoint.insertScoreEntity" : {
@@ -81,14 +81,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "scoreentityendpoint.removeScoreEntity" : {
+    "scoreentityendpoint.getScoreEntity" : {
       "path" : "scoreentity/{id}",
-      "httpMethod" : "DELETE",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "api.ScoreEntityEndpoint.removeScoreEntity",
+      "rosyMethod" : "api.ScoreEntityEndpoint.getScoreEntity",
       "request" : {
         "parameters" : {
           "id" : {
@@ -99,7 +99,7 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "scoreentityendpoint.listScoreEntity" : {
@@ -163,10 +163,7 @@
       }
     },
     "methods" : {
-      "api.ScoreEntityEndpoint.getScoreEntity" : {
-        "response" : {
-          "$ref" : "ScoreEntity"
-        }
+      "api.ScoreEntityEndpoint.removeScoreEntity" : {
       },
       "api.ScoreEntityEndpoint.insertScoreEntity" : {
         "request" : {
@@ -184,7 +181,10 @@
           "$ref" : "ScoreEntity"
         }
       },
-      "api.ScoreEntityEndpoint.removeScoreEntity" : {
+      "api.ScoreEntityEndpoint.getScoreEntity" : {
+        "response" : {
+          "$ref" : "ScoreEntity"
+        }
       },
       "api.ScoreEntityEndpoint.listScoreEntity" : {
         "response" : {

@@ -100,8 +100,11 @@ public class ScoreEntityEndpoint {
 	public ScoreEntity insertScoreEntity(ScoreEntity scoreentity) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (containsScoreEntity(scoreentity)) {
-				throw new EntityExistsException("Object already exists");
+			//TODO Fixes insertion without ID, but generates random ID...
+			if (scoreentity.getId() != null) {
+				if (containsScoreEntity(scoreentity)) {
+					throw new EntityExistsException("Object already exists");
+				}
 			}
 			mgr.makePersistent(scoreentity);
 		} finally {
