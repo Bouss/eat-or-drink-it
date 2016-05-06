@@ -2,18 +2,21 @@
 
 var score = angular.module('score', []);
 
+/**
+ * Controllers
+ */
 score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
   $scope.scores = [];
 
   $window.init = function() {
     console.log("windowinit called");
-    $scope.$apply($scope.loadScores);
+    $scope.$apply($scope.loadScoreentityendpointLib);
   };
 
   /**
-   *  Loads the scores via the API
+   * Loads the Score API
    */
-  $scope.loadScores = function() {
+  $scope.loadScoreentityendpointLib = function() {
     gapi.client.load('scoreentityendpoint', 'v1', function() {
       console.log("score api loaded");
       $scope.isBackendReady = true;
@@ -21,6 +24,9 @@ score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
     }, 'https://eat-or-drink-it.appspot.com/_ah/api');
   };
   
+  /**
+   *  Gets all the scores stored from the Datastore
+   */
   $scope.listScores = function() {
     gapi.client.scoreentityendpoint.listScoreEntity().execute(function(resp) {
       $scope.scores = resp.items;
@@ -30,3 +36,19 @@ score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
   };
     
 }]);
+
+/**
+ * Services
+ */
+score.service('scoreService', function() {
+
+  /**
+   * Inserts a score in the Datastore
+   */
+  this.insertScore = function(score) {
+    gapi.client.scoreentityendpoint.insertScoreEntity(score).execute(function(resp) {
+      console.log(resp);
+    });
+  }
+
+});
