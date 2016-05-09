@@ -8,9 +8,9 @@ function init() {
 }
 
 /**
- * Depedencies
+ * Dependencies
  */
-var app = angular.module('app', ['ngRoute', 'aoc', 'score']);
+var app = angular.module('app', ['ngRoute', 'uiGmapgoogle-maps', 'aoc', 'score']);
 
 /**
  * Constants
