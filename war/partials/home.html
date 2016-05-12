@@ -1,13 +1,27 @@
 <!-- Handled by ScoreCtrl -->
-<div ng-show="isBackendReady">
-  <a href="#/game" class="btn btn-primary">Jouer</a>
-
-  <!-- High scores -->
-  <h2>Meilleurs scores</h2>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="score in scores">
-      {{score}}
-    </li>
-  </ul>
-  
+<div class="jumbotron">
+  <h1>Eat Or Drink It</h1>
+  <a href="#/game" class="btn btn-lg btn-success">Jouer</a>
 </div>
+
+<!-- High scores -->
+<h2>Meilleurs scores</h2>
+<div ng-show="!isBackendReady" class="alert alert-info" role="alert">Chargement...</div>
+<div ng-show="isBackendReady">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nom</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="score in scores | orderBy:orderProp | limitTo:quantity">
+        <td>{{$index+1}}</td>
+        <td>{{score.name}}</td>
+        <td>{{score.score}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> 

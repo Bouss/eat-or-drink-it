@@ -7,6 +7,8 @@ var score = angular.module('score', []);
  */
 score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
   $scope.scores = [];
+  $scope.orderProp = '-score';
+  $scope.quantity = 10;
 
   $window.init = function() {
     console.log("windowinit called");

@@ -1,14 +1,22 @@
 <!-- Handled by ResultCtrl -->
-<div>
-  <h1>Mon score</h1>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="result in results">
-      <h3>
-        {{result.aocName}}
-        :
-        <span>{{result.question1Result}}</span>
-        <span>{{result.question2Result}}</span>
-      </h3>
-    </li>
-  </ul>
-</div>
+<h2>Mon score : {{score}} pts</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>AOC</th>
+      <th>Question</th>
+      <th>Géolocalisation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="result in results">
+      <td>{{$index+1}}</td>
+      <td>{{result.aocName}}</td>
+      <td>{{result.question1Result}} pts</td>
+      <td>{{result.question2Result}} pts</td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="#home" class="btn btn-success btn-lg btn-continue">Revenir à la page d'accueil</a>

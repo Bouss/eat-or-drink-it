@@ -10,6 +10,9 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'resu
   $scope.index = 0;
   $scope.answerValues = answerValues;
 
+  // Resets previous results when starting a new game
+  resultService.resetResults();
+  
   // Sets the Google map
   $scope.map = {
     center: {latitude: 46.8463196,longitude: 1.5732156},
@@ -40,15 +43,41 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'resu
     }
   };
   
+  // Hide all the elements on the map
+  var styles = [
+    {
+    	featureType: "administrative",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "water",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "road",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+  
   // Sets the Google map too
   $scope.options = {
     disableDefaultUI: true,
     disableDoubleClickZoom: true,
-    draggable: false
+    draggable: false,
+    styles: styles
   };
-
-  // Resets previous results when starting a new game
-  resultService.resetResults();
 
   /**
    * Checks the answer given and adds it into results
@@ -84,17 +113,12 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'resu
    * Inserts the score gotten from the results into the Datastore
    */
   $scope.insertScore = function() {
-    var results = resultService.getResults();
-    var points = 0;
-    
-    angular.forEach(results, function(value, key) {
-      points += parseInt(value.points);
-    });
-    
+    var score = resultService.getScore();
+  	
     scoreService.insertScore(
       {
-        name: "Toto",
-        score: points
+        name: "Titi",
+        score: score
       }
     );
   };
@@ -102,6 +126,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'resu
 
 aoc.controller('ResultCtrl', ['$scope', 'resultService', function($scope, resultService) {
   $scope.results = resultService.getResults();
+  $scope.score = resultService.getScore();
 }]);
 
 /**
@@ -121,6 +146,16 @@ aoc.service('resultService', function() {
   this.getResults = function() {
     return this.results;
   };
+  
+  this.getScore = function() {
+    var score = 0;
+    
+    angular.forEach(this.results, function(value, key) {
+      score += parseInt(value.points);
+    });
+    
+    return score;
+  }
 });
 
 /**
