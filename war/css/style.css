@@ -1,3 +1,34 @@
+/**
+  * Commons
+  */
+.table th {
+  text-align: center;   
+}
+
+/**
+  * index
+  */
+.main-template {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  font-style: italic;
+  font-size: 75%;
+}
+
+/**
+  * game
+  */
 .angular-google-map-container {
   height: 400px;
+}
+
+.map {
+  margin-top: 10px;
+}
+
+.btn-continue {
+  margin-top: 10px;
 }
