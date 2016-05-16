@@ -33,7 +33,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
         var q2Distance = Math.round(locationService.getDistance(aocLocation, answer.locationAnswer));
         
         // Assigns points according to the distance
-        for (var i = 0; i < distancePointsValues.length; i++) {
+        for (var i = 0; i <= distancePointsValues.length-1; i++) {
         	var distancePoints = distancePointsValues[i];
         	if (q2Distance <= distancePoints.distance) {
         		q2Res = distancePoints.points;
@@ -175,7 +175,7 @@ aoc.service('resultService', function() {
   this.getScore = function() {
     var score = 0;
     
-    for (var i = 0; i < this.results.length; i++) {
+    for (var i = 0; i <= this.results.length-1; i++) {
     	score += this.results[i].points;
     }
     
