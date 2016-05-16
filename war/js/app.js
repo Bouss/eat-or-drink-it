@@ -27,7 +27,7 @@ app.constant("distancePointsValues", [
   },
   {
   	distance: 100,
-  	points: 1
+  	points: 2
   },
   {
   	distance: 150,
