@@ -5,7 +5,7 @@ var aoc = angular.module('aoc', []);
 /**
  * Controllers
  */
-aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'resultService', 'scoreService', 'locationService', function($scope, $location, $http, answerValues, distancePointsValues, resultService, scoreService, locationService) {
+aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, answerValues, distancePointsValues, playerService, locationService, resultService, scoreService) {
   var aocs = $scope.aocs = data;
   $scope.index = 0;
   $scope.answerValues = answerValues;
@@ -77,7 +77,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
   	
     scoreService.insertScore(
       {
-        name: "Titi",
+        name: playerService.getPseudo(),
         score: score
       }
     );
@@ -101,7 +101,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
             coords: {latitude: lat, longitude: lng}
           };
            
-          $scope.locationAnswer = {lat: lat, lng: lng};
+          $scope.locationAnswer = {lat:	 lat, lng: lng};
           $scope.map.markers.pop();
           $scope.map.markers.push(marker);
           $scope.$apply();
