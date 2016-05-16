@@ -21,8 +21,13 @@ footer {
 /**
   * game
   */
+ui-gmap-google-map {
+  display: inline-block;
+}
+
 .angular-google-map-container {
   height: 400px;
+  width: 400px;
 }
 
 .map {
