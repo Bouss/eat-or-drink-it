@@ -19,6 +19,14 @@ footer {
 }
 
 /**
+  * home
+  */
+/* @TODO : find another way to vertically center the form-group */
+.form-group-pseudo {
+  margin-left: 340px;	
+}
+
+/**
   * game
   */
 ui-gmap-google-map {

@@ -5,7 +5,7 @@ var score = angular.module('score', []);
 /**
  * Controllers
  */
-score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
+score.controller('ScoreCtrl', ['$scope', '$window', '$location', 'playerService', function($scope, $window, $location, playerService) {
   $scope.scores = [];
   $scope.orderProp = '-score';
   $scope.quantity = 10;
@@ -36,7 +36,15 @@ score.controller('ScoreCtrl', ['$scope', '$window', function($scope, $window) {
       console.log(resp);
     });
   };
-    
+   
+  /**
+   * Sets the player's pseudo and redirects to a new game
+   */
+  $scope.play = function(pseudo) {
+  	playerService.setPseudo(pseudo);
+    $location.path('/game');
+  }
+  
 }]);
 
 /**
@@ -52,5 +60,5 @@ score.service('scoreService', function() {
       console.log(resp);
     });
   }
-
+  
 });

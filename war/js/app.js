@@ -60,6 +60,18 @@ app.config(['$routeProvider', function($routeProvider) {
 /**
  * Services
  */
+app.service('playerService', function() {
+	this.pseudo = "";
+	
+  this.setPseudo = function(pseudo) {
+    this.pseudo = pseudo;
+  };
+  
+  this.getPseudo = function() {
+    return this.pseudo;
+  };
+});
+
 app.service('locationService', function() {
     
   this.getDistance = function(loc1, loc2) {
