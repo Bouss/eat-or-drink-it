@@ -12,6 +12,45 @@ function init() {
  */
 var app = angular.module('app', ['ngRoute', 'uiGmapgoogle-maps', 'aoc', 'score']);
 
+app.controller('HomeCtrl', ['$scope', '$window', '$location', 'scoreService', 'aocService', 'playerService', function($scope, $window, $location, scoreService, aocService, playerService) {
+  $scope.scores = [];
+  $scope.orderProp = '-score';
+  $scope.quantity = 10;
+	
+  $window.init = function() {
+    console.log("windowinit called");
+    $scope.$apply($scope.loadScoreentityendpointLib);
+    $scope.$apply($scope.loadAocentityendpointLib);
+  };
+  
+  /**
+   * Loads the Score API
+   */
+  $scope.loadScoreentityendpointLib = function() {
+    gapi.client.load('scoreentityendpoint', 'v1', function() {
+      console.log("score api loaded");
+      $scope.isBackendReady = true;
+      scoreService.listScores($scope);
+    }, 'https://eat-or-drink-it.appspot.com/_ah/api');
+  };
+  
+  /**
+   * Loads the AOC API
+   */
+  $scope.loadAocentityendpointLib = function() {
+    gapi.client.load('aocentityendpoint', 'v1', function() {
+      console.log("aoc api loaded");
+      aocService.listAocs();
+    }, 'https://eat-or-drink-it.appspot.com/_ah/api');
+  };
+  
+  $scope.play = function(pseudo) {
+  	playerService.setPseudo(pseudo);
+    $location.path('/game');
+  }
+  
+}]);
+
 /**
  * Constants
  */
@@ -42,7 +81,7 @@ app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/home', {
 			templateUrl: 'partials/home.html',
-			controller:	 'ScoreCtrl'
+			controller:	 'HomeCtrl'
 		})
 		.when('/game', {
 			templateUrl: 'partials/game.html',

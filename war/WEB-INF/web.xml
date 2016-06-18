@@ -15,7 +15,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>api.ScoreEntityEndpoint</param-value>
+   <param-value>api.AocEntityEndpoint,api.ScoreEntityEndpoint</param-value>
   </init-param>
  </servlet>
  <servlet-mapping>

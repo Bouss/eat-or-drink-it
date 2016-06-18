@@ -5,17 +5,17 @@ var aoc = angular.module('aoc', []);
 /**
  * Controllers
  */
-aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, answerValues, distancePointsValues, playerService, locationService, resultService, scoreService) {
-  var aocs = $scope.aocs = data;
+aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
+  var aocs = $scope.aocs = aocService.getRandomAocs();
   $scope.index = 0;
   $scope.answerValues = answerValues;
-
+  
   // Resets previous results when starting a new game
   resultService.resetResults();
   
   // Initializes the Google map
   initMap();
-
+  
   /**
    * Checks the answer given and adds it into results
    */
@@ -63,7 +63,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
     $scope.index++;
     
     // When the game ends, saves the score and redirects to "/results"
-    if ($scope.index >= data.length) {
+    if ($scope.index >= aocs.length) {
       insertScore();
     	$location.path("/results");
     }
@@ -183,13 +183,31 @@ aoc.service('resultService', function() {
   }
 });
 
-/**
- * Fixtures
- */
-var data = [
-  {id: 1, name: 'Muscadet', answer: 1, zipCode: 44003, department: 'LOIRE-ATLANTIQUE', city: 'Aigrefeuille-sur-Maine'},
-  {id: 2, name: 'Camembert de Normandie', answer: 0, zipCode: 14001, department: 'CALVADOS', city: 'Acqueville'},
-  {id: 3, name: 'Coteaux du Lyonnais', answer: 1, zipCode: 69021, department: 'RHONE', city: 'Bessenay'},
-  {id: 4, name: 'Ossau-Iraty', answer: 0, zipCode: 65018, department: 'HAUTES-PYRENEES', city: 'Arrens-Marsous'},
-  {id: 5, name: 'Maroilles', answer: 0, zipCode: 59003, department: 'NORD', city: 'Any-Martin-Rieux'}
-];
+aoc.service('aocService', function() {
+	var self = this;
+	this.aocs = [];
+	
+  /**
+   *  Gets all the AOCs stored from the Datastore
+   */
+  this.listAocs = function() {
+    gapi.client.aocentityendpoint.listAocEntity().execute(function(resp) {
+      console.log(resp);
+      self.aocs = resp.items;
+    });
+  };
+	
+  /**
+   * Gets 5 random AOCs
+   */
+	this.getRandomAocs = function() {
+		var randAocs = [];
+		var randIndex = -1;
+		for (var i = 0; i <= 4; i++) {
+		  randIndex = Math.floor(Math.random() * (this.aocs.length - 0)) + 0;
+		  randAocs.push(this.aocs[randIndex]);
+		}
+		return randAocs;
+	}
+	
+});
