@@ -1,0 +1,205 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://eat-or-drink-it.appspot.com/_ah/api",
+  "name" : "aocentityendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://eat-or-drink-it.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "mycompany.com",
+  "ownerName" : "mycompany.com",
+  "packagePath" : "services",
+  "methods" : {
+    "aocentityendpoint.listAocEntity" : {
+      "path" : "aocentity",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "api.AocEntityEndpoint.listAocEntity",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "aocentityendpoint.getAocEntity" : {
+      "path" : "aocentity/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "api.AocEntityEndpoint.getAocEntity",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "aocentityendpoint.insertAocEntity" : {
+      "path" : "aocentity",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "api.AocEntityEndpoint.insertAocEntity",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "aocentityendpoint.updateAocEntity" : {
+      "path" : "aocentity",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "api.AocEntityEndpoint.updateAocEntity",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "aocentityendpoint.removeAocEntity" : {
+      "path" : "aocentity/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "api.AocEntityEndpoint.removeAocEntity",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_AocEntity" : {
+        "id" : "CollectionResponse_AocEntity",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "AocEntity"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AocEntity" : {
+        "id" : "AocEntity",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "zipCode" : {
+            "type" : "string"
+          },
+          "department" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "answer" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "api.AocEntityEndpoint.listAocEntity" : {
+        "response" : {
+          "$ref" : "CollectionResponse_AocEntity"
+        }
+      },
+      "api.AocEntityEndpoint.getAocEntity" : {
+        "response" : {
+          "$ref" : "AocEntity"
+        }
+      },
+      "api.AocEntityEndpoint.insertAocEntity" : {
+        "request" : {
+          "$ref" : "AocEntity"
+        },
+        "response" : {
+          "$ref" : "AocEntity"
+        }
+      },
+      "api.AocEntityEndpoint.updateAocEntity" : {
+        "request" : {
+          "$ref" : "AocEntity"
+        },
+        "response" : {
+          "$ref" : "AocEntity"
+        }
+      },
+      "api.AocEntityEndpoint.removeAocEntity" : {
+      }
+    }
+  }
+}
