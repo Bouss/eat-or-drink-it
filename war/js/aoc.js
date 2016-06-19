@@ -34,7 +34,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
     var q2Res = 0;
 
     // Gets the location of the AOC
-    $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: aoc.city + '+' + aoc.department + '+' + aoc.zipCode}})
+    $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: aoc.zipCode + "+" + aoc.city + "+" + aoc.department + "+" + "France"}})
       .then(function(resp) {
         var aocLocation = resp.data.results[0].geometry.location;
 
@@ -88,7 +88,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
     scoreService.insertScore(
       {
         name: playerService.getPseudo(),
-        score: score
+        score: resultService.getScore()
       }
     );
   };

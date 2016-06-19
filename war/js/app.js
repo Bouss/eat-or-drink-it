@@ -12,7 +12,7 @@ function init() {
  */
 var app = angular.module('app', ['ngRoute', 'uiGmapgoogle-maps', 'aoc', 'score']);
 
-app.controller('HomeCtrl', ['$scope', '$window', '$location', 'scoreService', 'aocService', 'playerService', function($scope, $window, $location, scoreService, aocService, playerService) {
+app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'scoreService', 'aocService', 'playerService', function($rootScope, $scope, $window, $location, scoreService, aocService, playerService) {
   $scope.scores = [];
   $scope.orderProp = '-score';
   $scope.quantity = 10;
@@ -23,13 +23,18 @@ app.controller('HomeCtrl', ['$scope', '$window', '$location', 'scoreService', 'a
     $scope.$apply($scope.loadAocentityendpointLib);
   };
   
+  // Lists the best scores only if the Score API is loaded
+  if (angular.isDefined($rootScope.isBackendReady) && $rootScope.isBackendReady) {
+    scoreService.listScores($scope);
+  }
+  
   /**
    * Loads the Score API
    */
   $scope.loadScoreentityendpointLib = function() {
     gapi.client.load('scoreentityendpoint', 'v1', function() {
       console.log("score api loaded");
-      $scope.isBackendReady = true;
+      $rootScope.isBackendReady = true;
       scoreService.listScores($scope);
     }, 'https://eat-or-drink-it.appspot.com/_ah/api');
   };
