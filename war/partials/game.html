@@ -8,7 +8,7 @@
     <!-- Question 1 : question -->
     <div class="form-group">
       <label class="radio-inline">
-        <input type="radio" ng-model="questionAnswer" value="{{answerValues.isFood}}">
+        <input type="radio" ng-model="questionAnswer" value="{{answerValues.isFood}}" ng-change="">
         Ça se mange
       </label>
       <label class="radio-inline">
@@ -22,8 +22,6 @@
       <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" events="map.events">
         <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
       </ui-gmap-google-map>
-    </div>
-        
-    <input type="submit" class="btn btn-success btn-lg btn-continue" ng-click="addAnswer({'questionAnswer': questionAnswer, 'locationAnswer': locationAnswer})" value="Continuer" />
+    </div>        
   </form>
 </div>
