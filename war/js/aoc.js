@@ -59,32 +59,31 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
     			  points:					 	 q1Res + q2Res
 				  }
 				);
+        
+        // Resets the answer given
+        $scope.questionAnswer = null;
+        $scope.locationAnswer = null;
+        $scope.map.markers.pop();
+        
+      	// Next question
+        $scope.index++;
+        
+        // When the game ends, saves the score and redirects to "/results"
+        if ($scope.index >= aocs.length) {
+          insertScore();
+        	$location.path("/results");
+        }
       }, function(error) {
         console.log(error);
       }
     );
     
-    // Resets the answer given
-    $scope.questionAnswer = null;
-    $scope.locationAnswer = null;
-    $scope.map.markers.pop();
-    
-  	// Next question
-    $scope.index++;
-    
-    // When the game ends, saves the score and redirects to "/results"
-    if ($scope.index >= aocs.length) {
-      insertScore();
-    	$location.path("/results");
-    }
   };
   
   /**
    * "Private" method - Inserts the score gotten from the results into the Datastore
    */
-  function insertScore() {
-    var score = resultService.getScore();
-  	
+  function insertScore() { 	
     scoreService.insertScore(
       {
         name: playerService.getPseudo(),
@@ -184,8 +183,8 @@ aoc.service('resultService', function() {
   
   this.getScore = function() {
     var score = 0;
-    
-    for (var i = 0; i <= this.results.length-1; i++) {
+
+    for (var i = 0; i < this.results.length; i++) {
     	score += this.results[i].points;
     }
     
