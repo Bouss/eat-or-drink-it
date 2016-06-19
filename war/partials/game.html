@@ -22,8 +22,6 @@
       <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" events="map.events">
         <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
       </ui-gmap-google-map>
-    </div>
-        
-    <input type="submit" class="btn btn-success btn-lg btn-continue" ng-click="addAnswer({'questionAnswer': questionAnswer, 'locationAnswer': locationAnswer})" value="Continuer" />
+    </div>        
   </form>
 </div>

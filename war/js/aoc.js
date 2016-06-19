@@ -9,12 +9,21 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
   var aocs = $scope.aocs = aocService.getRandomAocs();
   $scope.index = 0;
   $scope.answerValues = answerValues;
+  $scope.questionAnswer = null;
+  $scope.locationAnswer = null;
   
   // Resets previous results when starting a new game
   resultService.resetResults();
   
   // Initializes the Google map
   initMap();
+  
+  // Listener
+  $scope.$watchGroup(['questionAnswer', 'locationAnswer'], function(newValues, oldValues, scope) {
+  	if (null !== newValues[0] && null !== newValues[1]) {
+  	  $scope.addAnswer({'questionAnswer': newValues[0], 'locationAnswer': newValues[1]});
+  	}
+  });
   
   /**
    * Checks the answer given and adds it into results
@@ -25,7 +34,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
     var q2Res = 0;
 
     // Gets the location of the AOC
-    $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: aoc.city + '+' + aoc.zipCode}})
+    $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: aoc.city + '+' + aoc.department + '+' + aoc.zipCode}})
       .then(function(resp) {
         var aocLocation = resp.data.results[0].geometry.location;
 
@@ -55,8 +64,9 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
       }
     );
     
-    // Resets the answer given (on the view)
+    // Resets the answer given
     $scope.questionAnswer = null;
+    $scope.locationAnswer = null;
     $scope.map.markers.pop();
     
   	// Next question
