@@ -53,6 +53,8 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
         resultService.addResult(
           {
     			  aocName:				 	 aoc.name,
+    			  aocAnswer:				 aoc.answer,
+    			  aocDepartment:		 aoc.department,
     			  question1Result:	 q1Res,
     			  question2Result:	 q2Res,
     			  question2Distance: q2Distance,

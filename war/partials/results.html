@@ -13,8 +13,8 @@
     <tr ng-repeat="result in results">
       <td>{{$index+1}}</td>
       <td>{{result.aocName}}</td>
-      <td>{{result.question1Result}} pts</td>
-      <td>{{result.question2Result}} pts ({{result.question2Distance}} km)</td>
+      <td>{{result.question1Result}} pts <span class="label-answer">({{result.aocAnswer === 0 ? 'Ça se mange' : 'Ça se boit' }})</span></td>
+      <td>{{result.question2Result}} pts <span class="label-answer">({{result.question2Distance}} km, {{result.aocDepartment}})</span></td>
     </tr>
   </tbody>
 </table>
