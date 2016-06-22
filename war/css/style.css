@@ -2,17 +2,18 @@
   * Commons
   */
 .table th {
-  text-align: center;   
+  text-align: center;
+}
+
+.gold {
+  color: #D4AF37
 }
 
 /**
   * index
-  */
-.main-template {
-  text-align: center;
-}
-
+  */  
 footer {
+  margin-top: 20px;
   text-align: center;
   font-style: italic;
   font-size: 75%;
@@ -20,15 +21,101 @@ footer {
 
 /**
   * home
-  */
-/* @TODO : find another way to vertically center the form-group */
-.form-group-pseudo {
-  margin-left: 340px;	
+  */ 
+.title-app {
+    margin-bottom: 30px;
+    font-size: 50px;
+}
+
+.form-pseudo {
+	margin-bottom: 30px;
+}
+
+.input-pseudo {
+  color: black;
+  border: 1px solid white;
+  border-radius: 6px;
+  line-height: 2.5;
+}
+
+.btn-outline {
+  color: #D4AF37;
+  background-color: transparent;
+  border-color: #D4AF37;
+}
+
+.btn-outline:hover {
+  color: white;
+  background-color: #D4AF37;
+  border-color: #D4AF37;
 }
 
 /**
   * game
   */
+.label-question {
+	margin-top: 15px;
+}
+input[type="radio"].toggle {
+  display: none;
+}
+
+input[type="radio"].toggle + label {
+  background-color: transparent;
+}
+
+input[type="radio"].toggle-left + label {
+  color: red;
+  border-color: red;
+}
+
+input[type="radio"].toggle-right + label {
+  color: green;
+  border-color: green;
+}
+
+input[type="radio"].toggle:checked + label {
+  color: white;
+  cursor: default;
+}
+
+input[type="radio"].toggle-left:checked + label {
+  background-color: red;
+  border-color: red;
+}
+
+input[type="radio"].toggle-right:checked + label {
+  background-color: green;
+  border-color: green;
+}
+
+input[type="radio"].toggle + label {
+  width: 11em;
+}
+
+input[type="radio"].toggle + label.btn:hover {
+  background-position: 0 0;
+  transition: none;
+  color: white;
+}
+
+input[type="radio"].toggle-left + label.btn:hover {
+  background-color: red;
+}
+
+input[type="radio"].toggle-right + label.btn:hover {
+  background-color: green;
+}
+
+input[type="radio"].toggle-left + label {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="radio"].toggle-right + label {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 ui-gmap-google-map {
   display: inline-block;
 }
@@ -42,6 +129,9 @@ ui-gmap-google-map {
   margin-top: 10px;
 }
 
+/**
+  * results
+  */
 .btn-continue {
   margin-top: 10px;
 }

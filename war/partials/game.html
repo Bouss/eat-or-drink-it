@@ -1,27 +1,20 @@
 <!-- Handled by AocCtrl -->
-<div>  
+<h2 class="gold">{{aocs[index].name}}</h2>
+<h4>({{index+1}} / {{aocs.length}})</h4>
 
-  <h2>{{aocs[index].name}}</h2>
-  <h4>({{index+1}} / {{aocs.length}})</h4>
-
-  <form class="form-inline">
-    <!-- Question 1 : question -->
-    <div class="form-group">
-      <label class="radio-inline">
-        <input type="radio" ng-model="questionAnswer" value="{{answerValues.isFood}}">
-        Ça se mange
-      </label>
-      <label class="radio-inline">
-        <input type="radio" ng-model="questionAnswer" value="{{answerValues.isDrink}}">
-        Ça se boit
-      </label>
-    </div>
-        
-    <!-- Question 2 : location -->
-    <div class="map">
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" events="map.events">
-        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
-      </ui-gmap-google-map>
-    </div>        
-  </form>
-</div>
+<form>
+  <p class="label-question">Ça se mange ou ça se boit ?</p>
+  <!-- Question 1 : question -->
+    <input id="toggle-isFood" class="toggle toggle-left" name="toggle" value="{{answerValues.isFood}}" ng-model="questionAnswer" type="radio">
+    <label for="toggle-isFood" class="btn btn-lg">Ça se mange</label>
+    <input id="toggle-isDrink" class="toggle toggle-right" name="toggle" value="{{answerValues.isDrink}}" ng-model="questionAnswer" type="radio">
+    <label for="toggle-isDrink" class="btn btn-lg">Ça se boit</label>
+      
+  <!-- Question 2 : location -->
+  <p class="label-question">Ça vient d'où ? (Cliquez sur la carte pour placer le marqueur)</p>
+  <div class="map">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" events="map.events">
+      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>        
+</form>
