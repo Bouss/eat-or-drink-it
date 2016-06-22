@@ -30,8 +30,12 @@
 
   <static-files>
     <include path="/css/*.css" />
+    <include path="/css/lib/*.css" />
+    <include path="/fonts/glyphicons-halflings-regular.*" />
     <include path="/img/*.png" />
+    <include path="/img/*.jpg" />
     <include path="/js/*.js" />
+    <include path="/js/lib/*.js" />
     <include path="/partials/*.html" />
     <exclude path="/generator/**.png" />
   </static-files>

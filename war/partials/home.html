@@ -1,23 +1,13 @@
-<!-- Handled by ScoreCtrl -->
-<div class="jumbotron">
-  <h1>Eat Or Drink It</h1>
-  <form name="pseudoForm" class="form-horizontal">
-    <div class="form-group-pseudo">
-      <div class="form-group">
-        <label for="pseudo" class="col-sm-2 control-label">Pseudo :</label>
-        <div class="col-sm-3">
-         <input type="text" ng-model="pseudo" class="form-control" id="pseudo" required>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <input type="submit" ng-click="play(pseudo)" ng-disabled="pseudoForm.$invalid" class="btn btn-success btn-lg" value="Jouer" />
-    </div>
-  </form>
-</div>
+<!-- Handled by HomeCtrl -->
+<h1 class="title-app gold">Eat Or Drink It</h1>
+<form class="form-pseudo" name="pseudoForm">
+  <input class="input-pseudo" type="text" ng-model="pseudo" id="pseudo" placeholder="Votre pseudo" required>
+  <input class="btn btn-outline btn-lg" type="submit" ng-click="play(pseudo)" ng-disabled="pseudoForm.$invalid" value="Jouer" />
+  </div>
+</form>
 
 <!-- High scores -->
-<h2>Meilleurs scores</h2>
+<h3 class="title-bestScores">Meilleurs scores</h3>
 <div ng-show="!isBackendReady" class="alert alert-info" role="alert">Chargement...</div>
 <div ng-show="isBackendReady">
   <table class="table table-striped">
