@@ -12,10 +12,12 @@ function init() {
  */
 var app = angular.module('app', ['ngRoute', 'uiGmapgoogle-maps', 'aoc', 'score']);
 
-app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'scoreService', 'aocService', 'playerService', function($rootScope, $scope, $window, $location, scoreService, aocService, playerService) {
+
+/**
+ * Controllers
+ */
+app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'apiRoute', 'scoreService', 'aocService', 'playerService', function($rootScope, $scope, $window, $location, apiRoute, scoreService, aocService, playerService) {
   $scope.scores = [];
-  $scope.orderProp = '-score';
-  $scope.quantity = 10;
 	
   $window.init = function() {
     console.log("windowinit called");
@@ -36,7 +38,7 @@ app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'sco
       console.log("score api loaded");
       $rootScope.isBackendReady = true;
       scoreService.listScores($scope);
-    }, 'https://eat-or-drink-it.appspot.com/_ah/api');
+    }, apiRoute);
   };
   
   /**
@@ -46,7 +48,7 @@ app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'sco
     gapi.client.load('aocentityendpoint', 'v1', function() {
       console.log("aoc api loaded");
       aocService.listAocs();
-    }, 'https://eat-or-drink-it.appspot.com/_ah/api');
+    }, apiRoute);
   };
   
   $scope.play = function(pseudo) {
@@ -59,23 +61,25 @@ app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'sco
 /**
  * Constants
  */
+app.constant("apiRoute", "https://eat-or-drink-it.appspot.com/_ah/api");
+
 app.constant("answerValues", {
-	isFood: 0,
-	isDrink: 1
+	"isFood": 0,
+	"isDrink": 1
 });
 
 app.constant("distancePointsValues", [
   {
-  	distance: 50,
-  	points: 3
+  	"distance": 50,
+  	"points": 3
   },
   {
-  	distance: 100,
-  	points: 2
+  	"distance": 100,
+  	"points": 2
   },
   {
-  	distance: 150,
-  	points: 1
+  	"distance": 150,
+  	"points": 1
   }
 ]);
 

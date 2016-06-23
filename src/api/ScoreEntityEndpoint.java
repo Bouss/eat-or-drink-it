@@ -42,6 +42,9 @@ public class ScoreEntityEndpoint {
 		try {
 			mgr = getPersistenceManager();
 			Query query = mgr.newQuery(ScoreEntity.class);
+			
+			query.setOrdering("score desc");
+			
 			if (cursorString != null && cursorString != "") {
 				cursor = Cursor.fromWebSafeString(cursorString);
 				HashMap<String, Object> extensionMap = new HashMap<String, Object>();

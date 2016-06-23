@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="score in scores | orderBy:orderProp | limitTo:quantity">
+      <tr ng-repeat="score in scores">
         <td>{{$index+1}}</td>
         <td>{{score.name}}</td>
         <td>{{score.score}}</td>
