@@ -5,17 +5,26 @@ var aoc = angular.module('aoc', []);
 /**
  * Controllers
  */
-aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'questionCount', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, questionCount, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
+aoc.controller('AocCtrl', ['$scope', '$location', '$http', '$timeout', 'questionCount', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, $timeout, questionCount, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
   var aocs = $scope.aocs = aocService.getUniqueRandomAocs(questionCount);
   var answer = $scope.answer = {"question": null, "location": null};
+  var counter = 0
   $scope.answerValues = answerValues;
   $scope.index = 0;
+  ;
 
   // Resets previous results when starting a new game
   resultService.resetResults();
   
   // Initializes the Google map
   initMap();
+  
+  // Counts the time
+  $scope.onTimeout = function() {
+  	counter++;
+    timeout = $timeout($scope.onTimeout, 1000);
+  }
+  var timeout = $timeout($scope.onTimeout, 1000);
   
   // Listener
   $scope.$watchGroup(['answer.question', 'answer.location'], function(newValues, oldValues, scope) {
@@ -73,10 +82,14 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'questionCount', 'ans
         
         // When the game ends, saves the score and redirects to "/results"
         if ($scope.index >= aocs.length) {
+        	$timeout.cancel(timeout);
+        	resultService.setTime(counter);
           scoreService.insertScore(
           		{
           			"name": playerService.getPseudo(),
-          			"score": resultService.getScore()
+          			"score": resultService.getScore(),
+          			"time": counter,
+          			"date": new Date()
         			}
       		);
         	$location.path("/results");

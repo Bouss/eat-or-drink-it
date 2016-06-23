@@ -143,3 +143,16 @@ app.service('locationService', function() {
   }
 
 });
+
+/**
+  * Filters
+  */
+app.filter('secondsToMinutes', function() {
+
+  return function(value) {
+  	var minutes = Math.floor(value / 60);
+  	var seconds = value - minutes * 60;
+
+    return (value < 60) ? seconds + "s" : minutes + "min " + seconds + "s";
+  };
+});

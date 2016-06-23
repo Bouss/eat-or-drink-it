@@ -1,5 +1,7 @@
 package api;
 
+import java.util.Date;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -18,6 +20,12 @@ public class ScoreEntity {
 	@Persistent
 	int score;
 	
+	@Persistent
+	int time;
+
+	@Persistent
+	Date date;
+
 	public Long getId() {
 		return id;
 	}
@@ -40,5 +48,21 @@ public class ScoreEntity {
 	
 	public void setScore(int score) {
 		this.score = score;
+	}
+	
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

@@ -1,7 +1,7 @@
 <!-- Handled by HomeCtrl -->
 <h1 class="title-app gold">Eat Or Drink It</h1>
 <form class="form-pseudo" name="pseudoForm">
-  <input class="input-pseudo" type="text" ng-model="pseudo" id="pseudo" placeholder="Votre pseudo" required>
+  <input class="input-pseudo" type="text" ng-model="pseudo" id="pseudo" placeholder="Mon pseudo" required>
   <input class="btn btn-outline btn-lg" type="submit" ng-click="play(pseudo)" ng-disabled="pseudoForm.$invalid || !isAocSetLoaded" value="Jouer" />
   </div>
 </form>
@@ -18,6 +18,8 @@
         <th></th>
         <th>Nom</th>
         <th>Score</th>
+        <th>Temps</th>
+        <th>Date</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +27,8 @@
         <td>{{$index+1}}</td>
         <td>{{score.name}}</td>
         <td>{{score.score}}</td>
+        <td>{{score.time|secondsToMinutes}}</td>
+        <td>{{score.date|date:'dd/MM/yyyy à HH:mm'}}</td>
       </tr>
     </tbody>
   </table>
