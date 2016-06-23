@@ -1,8 +1,8 @@
 /**
   * Commons
   */
-.table th {
-  text-align: center;
+.table td {
+  text-align: left;
 }
 
 .gold {

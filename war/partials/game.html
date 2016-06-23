@@ -5,9 +5,9 @@
 <form>
   <p class="label-question">Ça se mange ou ça se boit ?</p>
   <!-- Question 1 : question -->
-    <input id="toggle-isFood" class="toggle toggle-left" name="toggle" value="{{answerValues.isFood}}" ng-model="questionAnswer" type="radio">
+    <input id="toggle-isFood" class="toggle toggle-left" name="toggle" value="{{answerValues.isFood}}" ng-model="answer.question" type="radio">
     <label for="toggle-isFood" class="btn btn-lg">Ça se mange</label>
-    <input id="toggle-isDrink" class="toggle toggle-right" name="toggle" value="{{answerValues.isDrink}}" ng-model="questionAnswer" type="radio">
+    <input id="toggle-isDrink" class="toggle toggle-right" name="toggle" value="{{answerValues.isDrink}}" ng-model="answer.question" type="radio">
     <label for="toggle-isDrink" class="btn btn-lg">Ça se boit</label>
       
   <!-- Question 2 : location -->

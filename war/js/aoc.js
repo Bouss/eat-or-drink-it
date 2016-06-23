@@ -7,11 +7,10 @@ var aoc = angular.module('aoc', []);
  */
 aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
   var aocs = $scope.aocs = aocService.getRandomAocs();
-  $scope.index = 0;
+  var answer = $scope.answer = {"question": null, "location": null};
   $scope.answerValues = answerValues;
-  $scope.questionAnswer = null;
-  $scope.locationAnswer = null;
-  
+  $scope.index = 0;
+
   // Resets previous results when starting a new game
   resultService.resetResults();
   
@@ -19,18 +18,18 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
   initMap();
   
   // Listener
-  $scope.$watchGroup(['questionAnswer', 'locationAnswer'], function(newValues, oldValues, scope) {
+  $scope.$watchGroup(['answer.question', 'answer.location'], function(newValues, oldValues, scope) {
   	if (null !== newValues[0] && null !== newValues[1]) {
-  	  $scope.addAnswer({'questionAnswer': newValues[0], 'locationAnswer': newValues[1]});
+  	  $scope.addAnswer();
   	}
   });
   
   /**
    * Checks the answer given and adds it into results
    */
-  $scope.addAnswer = function(answer) {
+  $scope.addAnswer = function() {
     var aoc = aocs[$scope.index];
-    var q1Res = (answer.questionAnswer == aoc.answer) ? 1 : 0;
+    var q1Res = (answer.question == aoc.answer) ? 1 : 0;
     var q2Res = 0;
 
     // Gets the location of the AOC
@@ -39,7 +38,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
         var aocLocation = resp.data.results[0].geometry.location;
 
         // Calculates the distance (rounded) between the real AOC's location and the location given by the player
-        var q2Distance = Math.round(locationService.getDistance(aocLocation, answer.locationAnswer));
+        var q2Distance = Math.round(locationService.getDistance(aocLocation, answer.location));
         
         // Assigns points according to the distance
         for (var i = 0; i <= distancePointsValues.length-1; i++) {
@@ -51,20 +50,22 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
         }
         
         resultService.addResult(
-          {
-    			  aocName:				 	 aoc.name,
-    			  aocAnswer:				 aoc.answer,
-    			  aocDepartment:		 aoc.department,
-    			  question1Result:	 q1Res,
-    			  question2Result:	 q2Res,
-    			  question2Distance: q2Distance,
-    			  points:					 	 q1Res + q2Res
-				  }
-				);
+        		{
+        			"question1Result": q1Res,
+        			"question2Result": q2Res,
+        			"question2Distance": q2Distance,
+        			"points": q1Res + q2Res,
+        			"aoc": {
+        				"name":	aoc.name,
+        				"answer": aoc.answer,
+        				"department": aoc.department
+        			}
+      			}
+    		);
         
         // Resets the answer given
-        $scope.questionAnswer = null;
-        $scope.locationAnswer = null;
+        $scope.answer.question = null;
+        $scope.answer.location = null;
         $scope.map.markers.pop();
         
       	// Next question
@@ -72,7 +73,12 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
         
         // When the game ends, saves the score and redirects to "/results"
         if ($scope.index >= aocs.length) {
-          insertScore();
+          scoreService.insertScore(
+          		{
+          			"name": playerService.getPseudo(),
+          			"score": resultService.getScore()
+        			}
+      		);
         	$location.path("/results");
         }
       }, function(error) {
@@ -80,18 +86,6 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
       }
     );
     
-  };
-  
-  /**
-   * "Private" method - Inserts the score gotten from the results into the Datastore
-   */
-  function insertScore() { 	
-    scoreService.insertScore(
-      {
-        name: playerService.getPseudo(),
-        score: resultService.getScore()
-      }
-    );
   };
   
   /**
@@ -112,7 +106,7 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
             coords: {latitude: lat, longitude: lng}
           };
            
-          $scope.locationAnswer = {lat:	 lat, lng: lng};
+          $scope.answer.location = {"lat": lat, "lng": lng};
           $scope.map.markers.pop();
           $scope.map.markers.push(marker);
           $scope.$apply();
@@ -160,40 +154,10 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
   
 }]);
 
-aoc.controller('ResultCtrl', ['$scope', 'resultService', function($scope, resultService) {
-  $scope.results = resultService.getResults();
-  $scope.score = resultService.getScore();
-}]);
 
 /**
  * Services
  */
-aoc.service('resultService', function() {
-  this.results = [];
-
-  this.resetResults = function() {
-    this.results = [];
-  };
-
-  this.addResult = function(result) {
-    this.results.push(result);
-  };
-
-  this.getResults = function() {
-    return this.results;
-  };
-  
-  this.getScore = function() {
-    var score = 0;
-
-    for (var i = 0; i < this.results.length; i++) {
-    	score += this.results[i].points;
-    }
-    
-    return score;
-  }
-});
-
 aoc.service('aocService', function() {
 	var self = this;
 	this.aocs = [];
