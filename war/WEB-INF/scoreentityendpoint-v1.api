@@ -158,6 +158,13 @@
           },
           "score" : {
             "type" : "integer"
+          },
+          "time" : {
+            "type" : "integer"
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       }

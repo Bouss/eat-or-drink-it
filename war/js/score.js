@@ -5,6 +5,7 @@ var score = angular.module('score', []);
 score.controller('ResultCtrl', ['$scope', 'resultService', function($scope, resultService) {
   $scope.results = resultService.getResults();
   $scope.score = resultService.getScore();
+  $scope.time = resultService.getTime();
 }]);
 
 /**
@@ -37,6 +38,7 @@ score.service('scoreService', function() {
 
 score.service('resultService', function() {
   this.results = [];
+  this.time = 0;
 
   this.resetResults = function() {
     this.results = [];
@@ -58,5 +60,13 @@ score.service('resultService', function() {
     }
     
     return score;
+  }
+  
+  this.getTime = function() {
+  	return this.time;
+  }
+  
+  this.setTime = function(time) {
+  	this.time = time;
   }
 });
