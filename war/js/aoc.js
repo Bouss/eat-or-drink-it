@@ -5,8 +5,8 @@ var aoc = angular.module('aoc', []);
 /**
  * Controllers
  */
-aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
-  var aocs = $scope.aocs = aocService.getRandomAocs();
+aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'questionCount', 'answerValues', 'distancePointsValues', 'aocService', 'playerService', 'locationService', 'resultService', 'scoreService', function($scope, $location, $http, questionCount, answerValues, distancePointsValues, aocService, playerService, locationService, resultService, scoreService) {
+  var aocs = $scope.aocs = aocService.getUniqueRandomAocs(questionCount);
   var answer = $scope.answer = {"question": null, "location": null};
   $scope.answerValues = answerValues;
   $scope.index = 0;
@@ -158,31 +158,44 @@ aoc.controller('AocCtrl', ['$scope', '$location', '$http', 'answerValues', 'dist
 /**
  * Services
  */
-aoc.service('aocService', function() {
+aoc.service('aocService', function($rootScope) {
 	var self = this;
 	this.aocs = [];
 	
   /**
    *  Gets all the AOCs stored from the Datastore
    */
-  this.listAocs = function() {
+  this.listAocs = function(homeCtrlScope) {
     gapi.client.aocentityendpoint.listAocEntity().execute(function(resp) {
       console.log(resp);
       self.aocs = resp.items;
+      $rootScope.isAocSetLoaded = true;
+      homeCtrlScope.$apply();
     });
   };
 	
   /**
-   * Gets 5 random AOCs
+   * Gets 5 unique random AOCs
    */
-	this.getRandomAocs = function() {
-		var randAocs = [];
-		var randIndex = -1;
-		for (var i = 0; i <= 4; i++) {
-		  randIndex = Math.floor(Math.random() * (this.aocs.length - 0)) + 0;
-		  randAocs.push(this.aocs[randIndex]);
-		}
-		return randAocs;
+	this.getUniqueRandomAocs = function(number) {
+		shuffle(this.aocs);
+		
+		return this.aocs.slice(0, number);
+	}
+	
+	function shuffle(array) {
+	  var currentIndex = array.length, temporaryValue, randomIndex;
+
+	  while (0 !== currentIndex) {
+	    randomIndex = Math.floor(Math.random() * currentIndex);
+	    currentIndex -= 1;
+
+	    temporaryValue = array[currentIndex];
+	    array[currentIndex] = array[randomIndex];
+	    array[randomIndex] = temporaryValue;
+	  }
+
+	  return array;
 	}
 	
 });

@@ -47,7 +47,7 @@ app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'api
   $scope.loadAocentityendpointLib = function() {
     gapi.client.load('aocentityendpoint', 'v1', function() {
       console.log("aoc api loaded");
-      aocService.listAocs();
+      aocService.listAocs($scope);
     }, apiRoute);
   };
   
@@ -62,6 +62,8 @@ app.controller('HomeCtrl', ['$rootScope', '$scope', '$window', '$location', 'api
  * Constants
  */
 app.constant("apiRoute", "https://eat-or-drink-it.appspot.com/_ah/api");
+
+app.constant("questionCount", 5);
 
 app.constant("answerValues", {
 	"isFood": 0,
