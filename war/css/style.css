@@ -1,4 +1,12 @@
 /**
+  * Fonts
+  */
+@font-face {
+  font-family: playball;
+  src: url(../fonts/Playball.ttf);
+}
+
+/**
   * Commons
   */
 .table td {
@@ -12,7 +20,7 @@
 /**
   * index
   */  
-footer {
+.label-footer {
   margin-top: 20px;
   text-align: center;
   font-style: italic;
@@ -23,12 +31,13 @@ footer {
   * home
   */ 
 .title-app {
-    margin-bottom: 30px;
-    font-size: 50px;
+  margin-bottom: 30px;
+  font-family: playball;
+  font-size: 500%;
 }
 
 .form-pseudo {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .input-pseudo {
@@ -54,8 +63,9 @@ footer {
   * game
   */
 .label-question {
-	margin-top: 15px;
+  margin-top: 15px;
 }
+
 input[type="radio"].toggle {
   display: none;
 }
@@ -137,5 +147,5 @@ ui-gmap-google-map {
 }
 
 .label-answer {
-	color: #959595;
+  color: #959595;
 }

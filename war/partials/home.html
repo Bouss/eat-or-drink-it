@@ -3,13 +3,12 @@
 <form class="form-pseudo" name="pseudoForm">
   <input class="input-pseudo" type="text" ng-model="pseudo" id="pseudo" placeholder="Mon pseudo" required>
   <input class="btn btn-outline btn-lg" type="submit" ng-click="play(pseudo)" ng-disabled="pseudoForm.$invalid || !isAocSetLoaded" value="Jouer" />
-  </div>
 </form>
 
 <div ng-show="!isAocSetLoaded" class="alert alert-info" role="alert">Chargement des AOCs, merci de patienter pour jouer...</div>
 
 <!-- High scores -->
-<h3 class="title-bestScores">Meilleurs scores</h3>
+<h3 class="title-bestScores gold">Meilleurs scores</h3>
 <div ng-show="!isBackendReady" class="alert alert-info" role="alert">Chargement des scores...</div>
 <div ng-show="isBackendReady">
   <table class="table table-striped">

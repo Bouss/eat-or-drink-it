@@ -32,6 +32,7 @@
     <include path="/css/*.css" />
     <include path="/css/lib/*.css" />
     <include path="/fonts/glyphicons-halflings-regular.*" />
+    <include path="/fonts/*.ttf" />
     <include path="/img/*.png" />
     <include path="/img/*.jpg" />
     <include path="/js/*.js" />
