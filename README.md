@@ -8,9 +8,9 @@ For each AOC (5 random AOCs a game), players have to answer the question "Is it 
 
 ## Technologies
 
-The project is a Google Web Application Project
-The backend is written in Java EE 7 with Google App Engine SDK
-The frontend is written in AngularJS 1.4.5
+The project is a Google Web Application Project  
+The backend is written in Java EE 7 with Google App Engine SDK  
+The frontend is written in AngularJS 1.4.5  
 The data are stored in Google Cloud Datastore
 
 The project uses open data :  https://www.data.gouv.fr/fr/datasets/aires-geographiques-des-aoc-aop/
