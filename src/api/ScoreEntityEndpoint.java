@@ -43,7 +43,7 @@ public class ScoreEntityEndpoint {
 			mgr = getPersistenceManager();
 			Query query = mgr.newQuery(ScoreEntity.class);
 			
-			query.setOrdering("score desc");
+			query.setOrdering("score desc, time asc");
 			
 			if (cursorString != null && cursorString != "") {
 				cursor = Cursor.fromWebSafeString(cursorString);
