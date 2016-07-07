@@ -1,8 +1,8 @@
-# Academic project
+# University project
 
-Project created in 2016 by three french students from the university of Nantes as part of our "DWAR" (in english, Web Development and Rich Internet Applications) unit.
+Project created in 2016 by three french students from the University of Nantes as part of our "DWAR" (in English, Web Development and Rich Internet Applications) unit.
 
-The aim of the application is a quizz about food, and more exactly the "AOC" products (in english, Controlled Designation of Origin).
+The aim of the application is a quizz about food, and more exactly the "AOC" products (in English, Controlled Designation of Origin).
 For each AOC (5 random AOCs a game), players have to answer the question "Is it food or drink ?" and put the geographic origin on a map.
 
 
